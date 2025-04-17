@@ -1,0 +1,23 @@
+#login {
+  overflow: hidden;
+}
+
+#login .col-12 {
+  padding: 0;
+}
+
+#login img {
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+#login .area-form {
+  background-color: #f7f7f7;
+}
+
+#login .card-login {
+  width: 75%;
+}
