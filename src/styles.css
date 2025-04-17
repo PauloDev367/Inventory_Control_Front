@@ -1,4 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
-.form-group{
-    margin-bottom: 20px;
+.form-group {
+  margin-bottom: 20px;
+}
+
+.base-layout {
+  padding: 40px 0;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0;
 }
