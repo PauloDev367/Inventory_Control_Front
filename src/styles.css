@@ -6,8 +6,12 @@
   padding: 40px 0;
 }
 
-h2 {
+h1 {
   font-size: 1.6rem;
+  margin-bottom: 0;
+}
+h2 {
+  font-size: 1.4rem;
   margin-bottom: 0;
 }
 
@@ -29,4 +33,13 @@ h2 {
     rgba(24, 27, 32, 1) 100%
   ) !important;
   overflow: hidden;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
+.table tr th,
+.table tr td {
+  white-space: nowrap;
 }
