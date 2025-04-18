@@ -1,0 +1,53 @@
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+  <div class="form-group">
+    <label>E-mail:</label>
+    <input
+      type="email"
+      name="email"
+      [(ngModel)]="login.email"
+      #emailInput="ngModel"
+      [email]="true"
+      class="form-control"
+      required
+    />
+    <div
+      *ngIf="emailInput.invalid && emailInput.touched"
+      class="text-danger mt-1"
+    >
+      <small *ngIf="emailInput.errors?.['required']"
+        >E-mail é obrigatório.</small
+      >
+      <small *ngIf="emailInput.errors?.['email']">E-mail inválido.</small>
+    </div>
+  </div>
+
+  <div class="form-group mt-3">
+    <label>Senha:</label>
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="login.password"
+      #passwordInput="ngModel"
+      class="form-control"
+      required
+      minlength="8"
+    />
+    <div
+      *ngIf="passwordInput.invalid && passwordInput.touched"
+      class="text-danger mt-1"
+    >
+      <small *ngIf="passwordInput.errors?.['required']"
+        >Senha é obrigatória.</small
+      >
+      <small *ngIf="passwordInput.errors?.['minlength']"
+        >A senha precisa ter no mínimo 8 caracteres.</small
+      >
+    </div>
+  </div>
+
+  <div class="form-group text-right mt-4">
+    <button class="btn btn-block btn-info" [disabled]="form.form.invalid">
+      Entrar
+    </button>
+  </div>
+</form>
