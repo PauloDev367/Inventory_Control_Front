@@ -6,11 +6,17 @@ import { NgFor, NgIf } from '@angular/common';
 import { BrTimeFormatPipe } from '../../shared/pipes/br-time-format.pipe';
 import { BrMoneyFormatterPipe } from '../../shared/pipes/br-money-formatter.pipe';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { CreateProductModalComponent } from '../../shared/components/create-product-modal/create-product-modal.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [NgFor, NgIf, BrTimeFormatPipe, BrMoneyFormatterPipe, PaginationComponent],
+  imports: [
+    NgFor, NgIf, BrTimeFormatPipe, BrMoneyFormatterPipe, PaginationComponent,
+    CreateProductModalComponent
+  ],
 
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
@@ -20,7 +26,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private service: ProductsService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   async ngOnInit() {
@@ -32,7 +39,12 @@ export class ProductsComponent implements OnInit {
       next: (result) => {
         this.products = result;
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => {
+        if (err.status == 401) {
+          this.toastr.error('Please, do login again to continue');
+          this.router.navigate(['/']);
+          return;
+        }
         this.toastr.error('Error when try to find products')
       }
     })
