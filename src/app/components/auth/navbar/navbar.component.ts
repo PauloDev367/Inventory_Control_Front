@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountService } from '../../../account/shared/account.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  constructor(
+    private readonly accountService: AccountService
+  ){}
 
+  async logout(){
+    await this.accountService.logout();
+  }
 }

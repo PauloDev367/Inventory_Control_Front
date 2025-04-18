@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
+import { UserLogin } from '../../interfaces/UserLogin';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  login(user: any) {
-    return new Promise((resolve) => {
-      window.localStorage.setItem('token', 'meu-token');
-      resolve(true);
-    })
+  async login(user: UserLogin) {
+    return this.http.post(`${environment.apiUrl}/login`, user);
+  }
+
+  async logout() {
+    window.localStorage.removeItem('token');
   }
 }
