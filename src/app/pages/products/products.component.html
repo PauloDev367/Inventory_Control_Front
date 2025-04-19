@@ -32,7 +32,7 @@
               <tr *ngFor="let product of products.items">
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
+                <td>{{ product.description | textLimiter }}</td>
                 <td>{{ product.quantity }}</td>
                 <td>{{ product.price | brMoneyFormatter }}</td>
                 <td>{{ product.minimumStock }}</td>
@@ -62,4 +62,4 @@
   </div>
 </div>
 
-<app-create-product-modal/>
+<app-create-product-modal (createdProduct)="newProduct($event)" />

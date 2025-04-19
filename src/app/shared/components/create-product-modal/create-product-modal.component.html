@@ -146,7 +146,7 @@
                   name="description"
                   required
                   #descriptionInput="ngModel"
-                  min="1"
+                  minlength="10"
                   rows="5"
                   class="form-control"
                 ></textarea>
@@ -157,8 +157,8 @@
                   <small *ngIf="descriptionInput.errors?.['required']"
                     >Description field is required.</small
                   >
-                  <small *ngIf="descriptionInput.errors?.['min']"
-                    >Description need to be bigger than 1.</small
+                  <small *ngIf="descriptionInput.errors?.['minlength']"
+                    >Description need to be bigger than 10.</small
                   >
                 </div>
               </div>

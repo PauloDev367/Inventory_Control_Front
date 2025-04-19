@@ -9,13 +9,15 @@ import { PaginationComponent } from '../../shared/components/pagination/paginati
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CreateProductModalComponent } from '../../shared/components/create-product-modal/create-product-modal.component';
+import { Product } from '../../interfaces/models';
+import { TextLimiterPipe } from '../../shared/pipes/text-limiter.pipe';
 
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [
     NgFor, NgIf, BrTimeFormatPipe, BrMoneyFormatterPipe, PaginationComponent,
-    CreateProductModalComponent
+    CreateProductModalComponent, TextLimiterPipe
   ],
 
   templateUrl: './products.component.html',
@@ -51,7 +53,10 @@ export class ProductsComponent implements OnInit {
   }
 
   async onPageChange(page: number) {
-    console.log(page);
     await this.getProducts(page);
+  }
+
+  async newProduct(newProduct: Product) {
+    this.products.items.unshift(newProduct);
   }
 }
