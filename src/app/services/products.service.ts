@@ -31,4 +31,12 @@ export class ProductsService {
       }
     });
   }
+
+  async getOne(id: String) {
+    return await this.http.get<Product>(`${environment.apiUrl}/products/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
+  }
 }
