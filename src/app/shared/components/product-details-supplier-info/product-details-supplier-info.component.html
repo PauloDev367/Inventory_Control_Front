@@ -1,0 +1,110 @@
+<div
+  class="modal fade"
+  id="modalShowProductSupplierInfo"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modalShowProductSupplierInfoTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalShowProductSupplierInfoTitle">
+          Supplier details
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="supplier.createdAt == ''; else withSupplier">
+        <div class="modal-body">
+          <h3>This product still haven't a supplier</h3>
+          <div class="form-group">
+            <label>Select supplier:</label>
+            <select name="" id="" class="form-control">
+              <option selected disabled>Select one</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-sm btn-secondary"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-sm btn-info">
+            <i class="fa-regular fa-square-plus"></i> Add Supplier
+          </button>
+        </div>
+      </div>
+      <ng-template #withSupplier>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label>Id:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="supplier.id"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label>Created at:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="supplier.createdAt | brTimeFormat"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label>Name:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="supplier.name"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label>E-mail:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="supplier.email"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label>Phone number:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="supplier.phoneNumber"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
