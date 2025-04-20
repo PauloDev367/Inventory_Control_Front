@@ -27,7 +27,12 @@
                 >
                   <i class="fa-solid fa-eye"></i> Show supplier info
                 </button>
-                <button class="btn btn-sm btn-warning ml-2">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-warning ml-2"
+                  data-toggle="modal"
+                  data-target="#modalProductDetailsCategory"
+                >
                   <i class="fa-solid fa-eye"></i> Show categories
                 </button>
               </div>
@@ -98,7 +103,6 @@
                 />
               </div>
             </div>
-
             <div class="col-12">
               <div class="form-group">
                 <label>Description:</label>
@@ -126,5 +130,9 @@
   <app-product-details-supplier-info
     *ngIf="product.createdAt != ''"
     [supplierId]="product.supplierId"
+  />
+  <app-product-details-category
+    *ngIf="product.createdAt != ''"
+    [productId]="product.id"
   />
 </div>

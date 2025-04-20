@@ -19,3 +19,10 @@ export interface Supplier {
     phoneNumber: string,
     products: null,
 }
+
+export interface Category {
+    createdAt: string,
+    deletedAt: null | string,
+    id: string,
+    name: string,
+}

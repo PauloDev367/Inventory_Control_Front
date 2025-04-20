@@ -7,11 +7,15 @@ import { Product } from '../../interfaces/models';
 import { NgIf } from '@angular/common';
 import { BrTimeFormatPipe } from '../../shared/pipes/br-time-format.pipe';
 import { ProductDetailsSupplierInfoComponent } from '../../shared/components/product-details-supplier-info/product-details-supplier-info.component';
+import { ProductDetailsCategoryComponent } from '../../shared/components/product-details-category/product-details-category.component';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [NgIf, BrTimeFormatPipe, ProductDetailsSupplierInfoComponent],
+  imports: [
+    NgIf, BrTimeFormatPipe, ProductDetailsSupplierInfoComponent,
+    ProductDetailsCategoryComponent
+  ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
@@ -41,10 +45,10 @@ export class ProductDetailsComponent implements OnInit {
     this.getProductData();
   }
 
-  handleIsToEdit(){
+  handleIsToEdit() {
     this.isToEdit = !this.isToEdit;
   }
-  
+
   private async getProductData() {
     (await this.service.getOne(this.id)).subscribe({
       next: (result) => {
