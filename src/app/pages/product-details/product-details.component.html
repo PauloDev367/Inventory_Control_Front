@@ -1,1 +1,130 @@
-<p>product-details works!</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div
+        *ngIf="product.createdAt != ''"
+        class="card-header d-flex align-items-center justify-content-between"
+      >
+        <h1>Product details</h1>
+        <button
+          class="btn btn-sm {{ isToEdit ? 'btn-secondary' : 'btn-warning' }}"
+          (click)="handleIsToEdit()"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+          {{ isToEdit ? "Show information" : "Edit product" }}
+        </button>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-info"
+                  data-toggle="modal"
+                  data-target="#modalShowProductSupplierInfo"
+                >
+                  <i class="fa-solid fa-eye"></i> Show supplier info
+                </button>
+                <button class="btn btn-sm btn-warning ml-2">
+                  <i class="fa-solid fa-eye"></i> Show categories
+                </button>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label>Id:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  disabled
+                  [value]="product.id"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label>Created at:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  disabled
+                  [value]="product.createdAt | brTimeFormat"
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label>Name:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [disabled]="!isToEdit"
+                  [value]="product.name"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label>Minimum stock:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [disabled]="!isToEdit"
+                  [value]="product.minimumStock"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label>Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [disabled]="!isToEdit"
+                  [value]="product.price"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label>Quantity:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [disabled]="!isToEdit"
+                  [value]="product.quantity"
+                />
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group">
+                <label>Description:</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  rows="10"
+                  [disabled]="!isToEdit"
+                  [value]="product.description"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-right" *ngIf="isToEdit">
+            <button class="btn btn-sm btn-success">
+              <i class="fa-solid fa-pen-to-square"></i> Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <app-product-details-supplier-info
+    *ngIf="product.createdAt != ''"
+    [supplierId]="product.supplierId"
+  />
+</div>
