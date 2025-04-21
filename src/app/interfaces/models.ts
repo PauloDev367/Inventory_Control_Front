@@ -26,3 +26,12 @@ export interface Category {
     id: string,
     name: string,
 }
+
+export interface SaleHistory {
+    createdAt: string,
+    id: string,
+    productId: string,
+    quantity: number,
+    totalPrice: number,
+    unityPrice: number,
+}
