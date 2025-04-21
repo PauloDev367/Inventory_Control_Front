@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h1>Product stock history</h1>
+      </div>
+      <div class="card-body" *ngIf="stockHistory.items.length > 0">
+        <a href="/products/{{ id }}" class="btn btn-sm btn-secondary mb-3">
+          <i class="fa-solid fa-arrow-left"></i> Back
+        </a>
+
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Quantity</th>
+              <th>Movement type</th>
+              <th>Created at</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sale of stockHistory.items">
+              <td>{{ sale.quantity }}</td>
+              <td>{{ sale.movementType | movementTypeFormat }}</td>
+              <td>{{ sale.createdAt | brTimeFormat }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="mt-4">
+          <app-pagination
+            [pageNumber]="stockHistory.pageNumber"
+            [totalPages]="stockHistory.totalPages"
+            (pageChange)="onPageChange($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

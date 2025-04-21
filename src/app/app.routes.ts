@@ -8,6 +8,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { ProductSalesHistoryComponent } from './pages/product-sales-history/product-sales-history.component';
 import { ProductPriceHistoryComponent } from './pages/product-price-history/product-price-history.component';
+import { ProductStockHistoryComponent } from './pages/product-stock-history/product-stock-history.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ export const routes: Routes = [
             { path: 'products/:id', component: ProductDetailsComponent },
             { path: 'products/:id/sales', component: ProductSalesHistoryComponent },
             { path: 'products/:id/prices', component: ProductPriceHistoryComponent },
+            { path: 'products/:id/stock-movement', component: ProductStockHistoryComponent },
         ],
         canActivate: [authGuard]
     },

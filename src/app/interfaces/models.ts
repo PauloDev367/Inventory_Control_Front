@@ -42,3 +42,11 @@ export interface PriceHistory {
     price: number,
     productId: string,
 }
+
+export interface StockMovementHistory {
+    createdAt: string,
+    id: string,
+    movementType: number,
+    productId: string,
+    quantity: number,
+}
