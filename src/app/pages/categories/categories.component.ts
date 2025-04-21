@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SalesService } from '../../services/sales.service';
-import { PaginateSaleHistory } from '../../interfaces/paginated';
+import { PaginateCategories, PaginateSaleHistory } from '../../interfaces/paginated';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -9,16 +8,17 @@ import { BrTimeFormatPipe } from '../../shared/pipes/br-time-format.pipe';
 import { MovementTypeFormatPipe } from '../../shared/pipes/movement-type-format.pipe';
 import { BrMoneyFormatterPipe } from '../../shared/pipes/br-money-formatter.pipe';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
+import { CategoriesService } from '../../services/categories.service';
 
 @Component({
-  selector: 'app-sales',
+  selector: 'app-categories',
   standalone: true,
   imports: [NgIf, BrTimeFormatPipe, MovementTypeFormatPipe, NgFor, BrMoneyFormatterPipe, PaginationComponent],
-  templateUrl: './sales.component.html',
-  styleUrl: './sales.component.css'
+  templateUrl: './categories.component.html',
+  styleUrl: './categories.component.css'
 })
-export class SalesComponent implements OnInit {
-  public salesHistory: PaginateSaleHistory = {
+export class CategoriesComponent implements OnInit {
+  public categories: PaginateCategories = {
     items: [],
     pageNumber: 0,
     pageSize: 0,
@@ -27,7 +27,7 @@ export class SalesComponent implements OnInit {
   };
 
   constructor(
-    private readonly service: SalesService,
+    private readonly service: CategoriesService,
     private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
@@ -40,7 +40,7 @@ export class SalesComponent implements OnInit {
   async getProductSaleHistory(page = 1) {
     (await this.service.getAll(page)).subscribe({
       next: (result) => {
-        this.salesHistory = result;
+        this.categories = result;
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == 401) {
@@ -61,5 +61,4 @@ export class SalesComponent implements OnInit {
   async onPageChange(page: number) {
     await this.getProductSaleHistory(page);
   }
-
 }
