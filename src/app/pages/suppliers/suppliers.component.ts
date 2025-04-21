@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { PaginateCategories, PaginateSuppliers } from '../../interfaces/paginated';
+import { PaginateSuppliers } from '../../interfaces/paginated';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgFor, NgIf } from '@angular/common';
 import { BrTimeFormatPipe } from '../../shared/pipes/br-time-format.pipe';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
-import { Category, Supplier } from '../../interfaces/models';
+import { Supplier } from '../../interfaces/models';
 import { SuppliersService } from '../../services/suppliers.service';
 import { SuppliersCreateComponent } from '../../shared/components/suppliers-create/suppliers-create.component';
 import { SuppliersEditComponent } from '../../shared/components/suppliers-edit/suppliers-edit.component';
@@ -68,16 +68,16 @@ export class SuppliersComponent implements OnInit {
     })
   }
 
-  createdSupplier(category: Supplier) {
-    this.suppliers.items.push(category);
+  createdSupplier(supplier: Supplier) {
+    this.suppliers.items.push(supplier);
   }
 
-  async deleteCategory(supplierId: string) {
-    const confirm = window.confirm('Do you really want to remove this category?');
+  async deleteSupplier(supplierId: string) {
+    const confirm = window.confirm('Do you really want to remove this supplier?');
     if (confirm) {
       (await this.service.delete(supplierId)).subscribe({
         next: (result) => {
-          this.toastr.success('Category removed successfully');
+          this.toastr.success('Supplier removed successfully');
           this.suppliers.items = this.suppliers.items.filter(sup => sup.id !== supplierId);
 
         },
@@ -88,11 +88,11 @@ export class SuppliersComponent implements OnInit {
             return;
           }
           if (err.status == 404) {
-            this.toastr.error('Category not founded');
+            this.toastr.error('Supplier not founded');
             this.router.navigate([`/suppliers`]);
             return;
           }
-          this.toastr.error('Error when try to update category');
+          this.toastr.error('Error when try to update supplier');
         }
       })
     }
