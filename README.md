@@ -1,4 +1,3 @@
-```markdown
 # Inventory Control Frontend
 
 This is the **frontend application** for the [Inventory Control API](https://github.com/PauloDev367/Inventory_Control), a complete inventory management system designed to help businesses efficiently track products, sales, suppliers, and stock movements.
