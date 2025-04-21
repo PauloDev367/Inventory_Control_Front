@@ -34,7 +34,7 @@
             <tr *ngFor="let category of categories">
               <td>{{ category.name }}</td>
               <td>
-                <button class="btn btn-sm btn-outline-danger">
+                <button class="btn btn-sm btn-outline-danger" (click)="removeCategory(category)">
                   <i class="fa-solid fa-trash"></i>
                 </button>
               </td>

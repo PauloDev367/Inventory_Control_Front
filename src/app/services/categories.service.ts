@@ -44,6 +44,17 @@ export class CategoriesService {
     });
   }
 
+  async removeProductCategory(categoryId: string, productId: string) {
+    return await this.http.delete<Category>(`${environment.apiUrl}/products/${productId}/categories`, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      },
+      body: {
+        categoriesId: [categoryId]
+      }
+    });
+  }
+
   async create(category: Category) {
     return await this.http.post<Category>(`${environment.apiUrl}/categories`, {
       name: category.name

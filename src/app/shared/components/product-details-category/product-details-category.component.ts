@@ -63,6 +63,27 @@ export class ProductDetailsCategoryComponent implements OnInit {
     );
   }
 
+  async removeCategory(category: Category) {
+    const confirm = window.confirm('Do you really want to remove this category?');
+    if (confirm) {
+      (await this.categoryService.removeProductCategory(category.id, this.productId)).subscribe({
+        next: (result) => {
+          alert('Categories removed');
+          window.location.reload();
+        },
+        error: (err) => {
+          if (err.status == 401) {
+            this.toastr.error('Please, do login again to continue');
+            this.router.navigate(['/']);
+            return;
+          }
+          this.toastr.error('Error when try to remove category');
+        }
+      });
+      return;
+    }
+  }
+
   async addCategoriesToProduct() {
     if (this.selectedCategories.length > 0) {
       const ids = this.selectedCategories.map(ct => ct.id);
