@@ -10,6 +10,7 @@ import { ProductSalesHistoryComponent } from './pages/product-sales-history/prod
 import { ProductPriceHistoryComponent } from './pages/product-price-history/product-price-history.component';
 import { ProductStockHistoryComponent } from './pages/product-stock-history/product-stock-history.component';
 import { SalesComponent } from './pages/sales/sales.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -23,7 +24,8 @@ export const routes: Routes = [
             { path: 'products/:id/sales', component: ProductSalesHistoryComponent },
             { path: 'products/:id/prices', component: ProductPriceHistoryComponent },
             { path: 'products/:id/stock-movement', component: ProductStockHistoryComponent },
-            { path: 'sales', component: SalesComponent},
+            { path: 'sales', component: SalesComponent },
+            { path: 'categories', component: CategoriesComponent },
         ],
         canActivate: [authGuard]
     },

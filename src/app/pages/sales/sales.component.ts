@@ -45,7 +45,7 @@ export class SalesComponent implements OnInit {
       error: (err: HttpErrorResponse) => {
         if (err.status == 401) {
           this.toastr.error('Please, do login again to continue');
-          this.router.navigate([`/sales`]);
+          this.router.navigate([`/`]);
           return;
         }
         if (err.status == 404) {

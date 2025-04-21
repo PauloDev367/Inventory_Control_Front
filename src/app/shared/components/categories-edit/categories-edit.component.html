@@ -1,0 +1,64 @@
+<div
+  class="modal fade"
+  id="modalEditCategory"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modalEditCategoryLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditCategoryLabel">Edit category</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <div class="modal-body" *ngIf="category.name != ''">
+          <div class="form-group">
+            <label>Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              [(ngModel)]="category.name"
+              [value]="category.name"
+              #nameInput="ngModel"
+              required
+              minlength="3"
+            />
+
+            <div
+              *ngIf="nameInput.invalid && nameInput.touched"
+              class="text-danger mt-1"
+            >
+              <small *ngIf="nameInput.errors?.['required']"
+                >Name field is erquired.</small
+              >
+              <small *ngIf="nameInput.errors?.['minlength']"
+                >Name should be bigger than 3.</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-sm btn-secondary"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-sm btn-warning">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
