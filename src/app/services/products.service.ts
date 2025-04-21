@@ -106,7 +106,7 @@ export class ProductsService {
   }
   
   async getProductStockHistory(id: string, page: number = 1) {
-    return await this.http.get<PaginateStockMovementHistory>(`${environment.apiUrl}/controller-movements/product/${id}?page=${page}`, {
+    return await this.http.get<PaginateStockMovementHistory>(`${environment.apiUrl}/stock-movements/product/${id}?page=${page}`, {
       headers: {
         Authorization: 'Bearer ' + this.token
       }
