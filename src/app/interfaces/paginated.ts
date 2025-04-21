@@ -1,4 +1,4 @@
-import { Category, PriceHistory, Product, SaleHistory, StockMovementHistory } from "./models";
+import { Category, PriceHistory, Product, SaleHistory, StockMovementHistory, Supplier } from "./models";
 
 export interface PaginateProducts {
     items: Array<Product>,
@@ -35,6 +35,15 @@ export interface PaginateStockMovementHistory {
 
 export interface PaginateCategories {
     items: Array<Category>,
+    pageNumber: number,
+    pageSize: number,
+    totalItems: number,
+    totalPages: number,
+}
+
+
+export interface PaginateSuppliers {
+    items: Array<Supplier>,
     pageNumber: number,
     pageSize: number,
     totalItems: number,

@@ -11,6 +11,7 @@ import { ProductPriceHistoryComponent } from './pages/product-price-history/prod
 import { ProductStockHistoryComponent } from './pages/product-stock-history/product-stock-history.component';
 import { SalesComponent } from './pages/sales/sales.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
+import { SuppliersComponent } from './pages/suppliers/suppliers.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ export const routes: Routes = [
             { path: 'products/:id/stock-movement', component: ProductStockHistoryComponent },
             { path: 'sales', component: SalesComponent },
             { path: 'categories', component: CategoriesComponent },
+            { path: 'suppliers', component: SuppliersComponent },
         ],
         canActivate: [authGuard]
     },
