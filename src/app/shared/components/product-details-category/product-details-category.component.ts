@@ -3,7 +3,6 @@ import { ProductsService } from '../../../services/products.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Category } from '../../../interfaces/models';
-import { BrTimeFormatPipe } from '../../pipes/br-time-format.pipe';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({

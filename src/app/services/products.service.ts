@@ -56,4 +56,14 @@ export class ProductsService {
       }
     });
   }
+
+  async addQuantityToProduct(productId: string, quantity: number) {
+    return await this.http.patch<Product>(`${environment.apiUrl}/products/${productId}/stock-movement/add`, {
+      quantity
+    }, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
+  }
 }

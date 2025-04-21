@@ -9,13 +9,14 @@ import { BrTimeFormatPipe } from '../../shared/pipes/br-time-format.pipe';
 import { ProductDetailsSupplierInfoComponent } from '../../shared/components/product-details-supplier-info/product-details-supplier-info.component';
 import { ProductDetailsCategoryComponent } from '../../shared/components/product-details-category/product-details-category.component';
 import { FormsModule } from '@angular/forms';
+import { ProductDetailsAddOrMinusQuantityComponent } from '../../shared/components/product-details-add-or-minus-quantity/product-details-add-or-minus-quantity.component';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
   imports: [
     NgIf, BrTimeFormatPipe, ProductDetailsSupplierInfoComponent,
-    ProductDetailsCategoryComponent, FormsModule
+    ProductDetailsCategoryComponent, FormsModule, ProductDetailsAddOrMinusQuantityComponent
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
@@ -76,6 +77,10 @@ export class ProductDetailsComponent implements OnInit {
         this.toastr.error('Error when try to update product');
       }
     });
+  }
+
+  async updatedProduct(product: Product){
+    this.product = product;
   }
 
   private async getProductData() {

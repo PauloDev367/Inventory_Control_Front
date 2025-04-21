@@ -159,6 +159,20 @@
                   #quantityInput="ngModel"
                   min="1"
                 />
+
+                <div class="text-right mt-2" *ngIf="isToEdit">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-outline-info mr-2"
+                    data-toggle="modal"
+                    data-target="#addQuantityModal"
+                  >
+                    <i class="fa-regular fa-square-plus"></i>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-danger">
+                    <i class="fa-regular fa-square-minus"></i>
+                  </button>
+                </div>
                 <div
                   *ngIf="quantityInput.invalid && quantityInput.touched"
                   class="text-danger mt-1"
@@ -223,6 +237,10 @@
   />
   <app-product-details-category
     *ngIf="product.createdAt != ''"
+    [productId]="product.id"
+  />
+  <app-product-details-add-or-minus-quantity
+    (updatedProduct)="updatedProduct($event)"
     [productId]="product.id"
   />
 </div>

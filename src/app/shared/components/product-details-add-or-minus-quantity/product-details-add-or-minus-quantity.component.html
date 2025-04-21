@@ -1,0 +1,66 @@
+<div
+  class="modal fade"
+  id="addQuantityModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addQuantityModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addQuantityModalLabel">
+          Add stock to product
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="(addQuantity())" #form="ngForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Quantity to add:</label>
+            <input
+              type="number"
+              class="form-control"
+              name="quantityToAdd"
+              id="quantityToAdd"
+               #qntAddInput="ngModel"
+              [(ngModel)]="quantityToAdd"
+              required
+              min="1"
+            />
+            <div
+              *ngIf="qntAddInput.invalid && qntAddInput.touched"
+              class="text-danger mt-1"
+            >
+              <small *ngIf="qntAddInput.errors?.['required']"
+                >Quantity field is required.</small
+              >
+              <small *ngIf="qntAddInput.errors?.['min']"
+                >Quantity should be bigger than 0.</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-sm btn-secondary"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-sm btn-info">
+            <i class="fa-regular fa-square-plus"></i> Add
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
