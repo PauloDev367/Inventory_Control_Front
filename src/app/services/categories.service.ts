@@ -17,10 +17,40 @@ export class CategoriesService {
     this.token = window.localStorage.getItem('token');
   }
 
-  async getAll(page: number = 1) {
-    return await this.http.get<PaginateCategories>(`${environment.apiUrl}/categories?page=${page}`, {
+  async getAll(page: number = 1, search?: string) {
+    const params = new URLSearchParams();
+    params.set('page', page.toString());
+    if (search) {
+      params.set('search', search);
+    }
+
+    return await this.http.get<PaginateCategories>(
+      `${environment.apiUrl}/categories?${params.toString()}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.token
+        }
+      }
+    );
+  }
+
+  async addCategoriesToProduct(categoriesId: Array<string>, productId: string) {
+    return await this.http.post<Category>(`${environment.apiUrl}/products/${productId}/categories`, {
+      categoriesId: categoriesId
+    }, {
       headers: {
         Authorization: 'Bearer ' + this.token
+      }
+    });
+  }
+
+  async removeProductCategory(categoryId: string, productId: string) {
+    return await this.http.delete<Category>(`${environment.apiUrl}/products/${productId}/categories`, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      },
+      body: {
+        categoriesId: [categoryId]
       }
     });
   }
