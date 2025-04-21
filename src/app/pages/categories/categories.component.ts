@@ -9,11 +9,13 @@ import { MovementTypeFormatPipe } from '../../shared/pipes/movement-type-format.
 import { BrMoneyFormatterPipe } from '../../shared/pipes/br-money-formatter.pipe';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { CategoriesService } from '../../services/categories.service';
+import { CategoriesEditComponent } from '../../shared/components/categories-edit/categories-edit.component';
+import { Category } from '../../interfaces/models';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [NgIf, BrTimeFormatPipe, MovementTypeFormatPipe, NgFor, BrMoneyFormatterPipe, PaginationComponent],
+  imports: [CategoriesEditComponent, NgIf, BrTimeFormatPipe, MovementTypeFormatPipe, NgFor, BrMoneyFormatterPipe, PaginationComponent],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css'
 })
@@ -24,6 +26,13 @@ export class CategoriesComponent implements OnInit {
     pageSize: 0,
     totalItems: 0,
     totalPages: 0,
+  };
+
+  public categoryToEdit: Category = {
+    createdAt: "",
+    deletedAt: "",
+    id: "",
+    name: "",
   };
 
   constructor(

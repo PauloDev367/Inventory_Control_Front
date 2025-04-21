@@ -20,11 +20,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sale of categories.items">
-                <td>{{ sale.name }}</td>
-                <td>{{ sale.createdAt | brTimeFormat }}</td>
+              <tr *ngFor="let category of categories.items">
+                <td>{{ category.name }}</td>
+                <td>{{ category.createdAt | brTimeFormat }}</td>
                 <td>
-                  <button class="btn btn-sm btn-outline-warning mr-2">
+                  <button
+                    class="btn btn-sm btn-outline-warning mr-2"
+                    (click)="categoryToEdit = category"
+                    data-toggle="modal"
+                    data-target="#modalEditCategory"
+                  >
                     <i class="fa-solid fa-pen-to-square"></i>
                   </button>
                   <button class="btn btn-sm btn-outline-danger">
@@ -47,3 +52,5 @@
     </div>
   </div>
 </div>
+
+<app-categories-edit [category]="categoryToEdit" />
