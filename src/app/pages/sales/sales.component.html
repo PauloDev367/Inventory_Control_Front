@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h1>Sales</h1>
+      </div>
+      <div class="card-body" *ngIf="salesHistory.items.length > 0">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Quantity</th>
+              <th>Total price</th>
+              <th>Unity price</th>
+              <th>Created at</th>
+              <th>See the product</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sale of salesHistory.items">
+              <td>{{ sale.quantity }}</td>
+              <td>{{ sale.totalPrice | brMoneyFormatter }}</td>
+              <td>{{ sale.unityPrice | brMoneyFormatter }}</td>
+              <td>{{ sale.createdAt | brTimeFormat }}</td>
+              <td>
+                <a
+                  href="/products/{{ sale.productId }}"
+                  class="btn btn-sm btn-outline-info"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="mt-4">
+          <app-pagination
+            [pageNumber]="salesHistory.pageNumber"
+            [totalPages]="salesHistory.totalPages"
+            (pageChange)="onPageChange($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
