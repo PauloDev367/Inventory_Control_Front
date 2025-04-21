@@ -29,7 +29,6 @@ export class CategoriesEditComponent {
   ) {
 
   }
-
   async onSubmit() {
     (await this.service.update(this.category)).subscribe({
       next: (result) => {

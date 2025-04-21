@@ -59,12 +59,39 @@ export class CategoriesComponent implements OnInit {
         }
         if (err.status == 404) {
           this.toastr.error('Product not founded');
-          this.router.navigate([`/sales`]);
+          this.router.navigate([`/categories`]);
           return;
         }
         this.toastr.error('Error when try to find product sales history');
       }
     })
+  }
+
+
+  async deleteCategory(categoryId: string) {
+    const confirm = window.confirm('Do you really want to remove this category?');
+    if (confirm) {
+      (await this.service.delete(categoryId)).subscribe({
+        next: (result) => {
+          this.toastr.success('Category removed successfully');
+          this.categories.items = this.categories.items.filter(cat => cat.id !== categoryId);
+
+        },
+        error: (err) => {
+          if (err.status == 401) {
+            this.toastr.error('Please, do login again to continue');
+            this.router.navigate([`/`]);
+            return;
+          }
+          if (err.status == 404) {
+            this.toastr.error('Category not founded');
+            this.router.navigate([`/categories`]);
+            return;
+          }
+          this.toastr.error('Error when try to update category');
+        }
+      })
+    }
   }
 
   async onPageChange(page: number) {

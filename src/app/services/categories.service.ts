@@ -34,4 +34,12 @@ export class CategoriesService {
       }
     });
   }
+
+  async delete(categoryId: string) {
+    return await this.http.delete(`${environment.apiUrl}/categories/${categoryId}`, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
+  }
 }
