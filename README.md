@@ -74,7 +74,7 @@ src/
 │   ├── pages/          # Application pages (products, sales, categories, etc.)
 │   ├── services/       # API service handlers
 │   ├── interfaces/     # Interfaces and models
-│   └── guards/         # Route guards
+│   └── shared/         # Shared components
 │
 └── assets/             # Static assets
 ```
@@ -90,4 +90,3 @@ This project is licensed under the MIT License.
 ---
 
 **Made with ❤️ by [PauloDev367](https://github.com/PauloDev367)**
-```
