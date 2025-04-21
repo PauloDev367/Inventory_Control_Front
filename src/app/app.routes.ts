@@ -13,6 +13,7 @@ import { SalesComponent } from './pages/sales/sales.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { SuppliersComponent } from './pages/suppliers/suppliers.component';
 import { StockMovementComponent } from './pages/stock-movement/stock-movement.component';
+import { UsersComponent } from './pages/users/users.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -30,6 +31,7 @@ export const routes: Routes = [
             { path: 'categories', component: CategoriesComponent },
             { path: 'suppliers', component: SuppliersComponent },
             { path: 'stock-movements', component: StockMovementComponent },
+            { path: 'users', component: UsersComponent },
         ],
         canActivate: [authGuard]
     },

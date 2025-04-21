@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h1>Users</h1>
+      </div>
+      <div class="card-body">
+        <div class="text-right">
+          <button
+            class="btn btn-sm btn-info mb-3"
+            data-toggle="modal"
+            data-target="#modalCreateUser"
+          >
+            <i class="fa-regular fa-square-plus"></i> Add new user
+          </button>
+        </div>
+        <div *ngIf="users.items.length > 0">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users.items">
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-outline-warning mr-2"
+                    (click)="
+                      userToEdit = {
+                        email: user.email,
+                        id: user.id,
+                        name: user.name,
+                        password: ''
+                      }
+                    "
+                    data-toggle="modal"
+                    data-target="#modalEditUser"
+                  >
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button
+                    class="btn btn-sm btn-outline-danger"
+                    (click)="delete(user.id)"
+                  >
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="mt-4">
+            <app-pagination
+              [pageNumber]="users.pageNumber"
+              [totalPages]="users.totalPages"
+              (pageChange)="onPageChange($event)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-users-edit [user]="userToEdit" />
+<app-users-create />
