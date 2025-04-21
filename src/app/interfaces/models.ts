@@ -50,3 +50,16 @@ export interface StockMovementHistory {
     productId: string,
     quantity: number,
 }
+
+export interface User {
+    id: string,
+    name: string,
+    email: string
+}
+
+export interface UpdateUser {
+    id: string,
+    name: string,
+    email: string,
+    password: string
+}
