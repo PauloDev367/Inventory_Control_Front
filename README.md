@@ -1,27 +1,94 @@
-# InventoryControl
+```markdown
+# Inventory Control Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
+This is the **frontend application** for the [Inventory Control API](https://github.com/PauloDev367/Inventory_Control), a complete inventory management system designed to help businesses efficiently track products, sales, suppliers, and stock movements.
 
-## Development server
+> 🔗 **Backend Repository**: [Inventory Control API](https://github.com/PauloDev367/Inventory_Control)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Features
 
-## Code scaffolding
+This frontend consumes the Inventory Control API and provides an intuitive interface for managing your inventory data.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 📦 Products Page
+- View detailed product information.
+- Access supplier details.
+- Add, remove, and view product categories.
+- See the product's sales history.
+- View the product's price history.
+- Track the product's stock movement history.
+- Edit product data.
+- Remove quantities from inventory, with the option to register it as a sale or not.
 
-## Build
+### 🗂️ Categories Page
+- Manage product categories.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 💰 Sales Page
+- View and manage product sales.
 
-## Running unit tests
+### 🤝 Suppliers Page
+- Manage supplier information.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 👤 Users Page
+- View and manage system users.
 
-## Running end-to-end tests
+### 🔄 Stock Movements Page
+- Track all stock in/out movements.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 🔐 Login Page
+- Secure login for user authentication.
 
-## Further help
+## 🛠️ Technologies Used
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Angular** (v18+)
+- **Bootstrap** for responsive UI
+- **TypeScript** for strong typing
+- **RxJS** for reactive programming
+- **Toastr** for user notifications
+- **JWT** for authentication with the backend
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/PauloDev367/Inventory_Control_Front.git
+cd Inventory_Control_Front
+npm install
+```
+
+## ▶️ Running the App
+
+```bash
+ng serve
+```
+
+Then open your browser at `http://localhost:4200`.
+
+## 🔒 Authentication
+
+This frontend uses JWT for authentication. You must log in via the login page to access protected resources. The token will be stored in `localStorage` and attached to API requests.
+
+## 📁 Folder Structure
+
+```bash
+src/
+│
+├── app/
+│   ├── pages/          # Application pages (products, sales, categories, etc.)
+│   ├── services/       # API service handlers
+│   ├── interfaces/     # Interfaces and models
+│   └── guards/         # Route guards
+│
+└── assets/             # Static assets
+```
+
+## 📌 Notes
+
+Make sure the [Inventory Control API](https://github.com/PauloDev367/Inventory_Control) is running locally or remotely and that the environment configuration matches the correct API URL.
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+**Made with ❤️ by [PauloDev367](https://github.com/PauloDev367)**
+```
