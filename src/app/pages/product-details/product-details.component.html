@@ -15,7 +15,7 @@
         </button>
       </div>
       <div class="card-body">
-        <form>
+        <form (ngSubmit)="onSumbmitForm()" #form="ngForm">
           <div class="row">
             <div class="col-12">
               <div class="form-group">
@@ -67,9 +67,27 @@
                   class="form-control"
                   [disabled]="!isToEdit"
                   [value]="product.name"
+                  [(ngModel)]="product.name"
+                  id="name"
+                  name="name"
+                  required
+                  #nameInput="ngModel"
+                  minlength="3"
                 />
               </div>
+              <div
+                *ngIf="nameInput.invalid && nameInput.touched"
+                class="text-danger mt-1"
+              >
+                <small *ngIf="nameInput.errors?.['required']"
+                  >Name field is required.</small
+                >
+                <small *ngIf="nameInput.errors?.['minlength']"
+                  >Name need to have 3 characters.</small
+                >
+              </div>
             </div>
+
             <div class="col-12 col-md-4">
               <div class="form-group">
                 <label>Minimum stock:</label>
@@ -78,7 +96,24 @@
                   class="form-control"
                   [disabled]="!isToEdit"
                   [value]="product.minimumStock"
+                  [(ngModel)]="product.minimumStock"
+                  id="minimumStock"
+                  name="minimumStock"
+                  required
+                  #minimumStockInput="ngModel"
+                  min="1"
                 />
+                <div
+                  *ngIf="minimumStockInput.invalid && minimumStockInput.touched"
+                  class="text-danger mt-1"
+                >
+                  <small *ngIf="minimumStockInput.errors?.['required']"
+                    >Minimum stock field is required.</small
+                  >
+                  <small *ngIf="minimumStockInput.errors?.['min']"
+                    >Minimum stock need to be bigger than 1.</small
+                  >
+                </div>
               </div>
             </div>
             <div class="col-12 col-md-4">
@@ -89,7 +124,24 @@
                   class="form-control"
                   [disabled]="!isToEdit"
                   [value]="product.price"
+                  [(ngModel)]="product.price"
+                  id="price"
+                  name="price"
+                  required
+                  #priceInput="ngModel"
+                  min="1"
                 />
+                <div
+                  *ngIf="priceInput.invalid && priceInput.touched"
+                  class="text-danger mt-1"
+                >
+                  <small *ngIf="priceInput.errors?.['required']"
+                    >Price field is required.</small
+                  >
+                  <small *ngIf="priceInput.errors?.['min']"
+                    >Price need to be bigger than 1.</small
+                  >
+                </div>
               </div>
             </div>
             <div class="col-12 col-md-4">
@@ -98,9 +150,26 @@
                 <input
                   type="number"
                   class="form-control"
-                  [disabled]="!isToEdit"
+                  disabled
                   [value]="product.quantity"
+                  [(ngModel)]="product.quantity"
+                  id="quantity"
+                  name="quantity"
+                  required
+                  #quantityInput="ngModel"
+                  min="1"
                 />
+                <div
+                  *ngIf="quantityInput.invalid && quantityInput.touched"
+                  class="text-danger mt-1"
+                >
+                  <small *ngIf="quantityInput.errors?.['required']"
+                    >Quantity field is required.</small
+                  >
+                  <small *ngIf="quantityInput.errors?.['min']"
+                    >Quantity need to be bigger than 1.</small
+                  >
+                </div>
               </div>
             </div>
             <div class="col-12">
@@ -112,13 +181,34 @@
                   rows="10"
                   [disabled]="!isToEdit"
                   [value]="product.description"
+                  [(ngModel)]="product.description"
+                  id="description"
+                  name="description"
+                  required
+                  #descriptionInput="ngModel"
+                  minlength="10"
                 ></textarea>
+                <div
+                  *ngIf="descriptionInput.invalid && descriptionInput.touched"
+                  class="text-danger mt-1"
+                >
+                  <small *ngIf="descriptionInput.errors?.['required']"
+                    >Description field is required.</small
+                  >
+                  <small *ngIf="descriptionInput.errors?.['minlength']"
+                    >Description need to be bigger than 10.</small
+                  >
+                </div>
               </div>
             </div>
           </div>
 
           <div class="text-right" *ngIf="isToEdit">
-            <button class="btn btn-sm btn-success">
+            <button
+              type="submit"
+              class="btn btn-sm btn-success"
+              [disabled]="form.form.invalid"
+            >
               <i class="fa-solid fa-pen-to-square"></i> Update
             </button>
           </div>

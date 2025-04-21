@@ -8,13 +8,14 @@ import { NgIf } from '@angular/common';
 import { BrTimeFormatPipe } from '../../shared/pipes/br-time-format.pipe';
 import { ProductDetailsSupplierInfoComponent } from '../../shared/components/product-details-supplier-info/product-details-supplier-info.component';
 import { ProductDetailsCategoryComponent } from '../../shared/components/product-details-category/product-details-category.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
   imports: [
     NgIf, BrTimeFormatPipe, ProductDetailsSupplierInfoComponent,
-    ProductDetailsCategoryComponent
+    ProductDetailsCategoryComponent, FormsModule
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
@@ -47,6 +48,34 @@ export class ProductDetailsComponent implements OnInit {
 
   handleIsToEdit() {
     this.isToEdit = !this.isToEdit;
+  }
+
+  async onSumbmitForm() {
+    (await this.service.updateProduct({
+      description: this.product.description,
+      minimumStock: this.product.minimumStock,
+      name: this.product.name,
+      price: this.product.price
+    }, this.product.id)).subscribe({
+      next: (result) => {
+        this.toastr.success('Product updated successfully!');
+        this.isToEdit = false;
+      },
+      error: (err) => {
+        if (err.status == 401) {
+          this.toastr.error('Please, do login again to continue');
+          this.router.navigate(['/']);
+          return;
+        }
+        if (err.status == 404) {
+          this.toastr.error('Product not founded');
+          this.router.navigate(['/products']);
+          return;
+        }
+
+        this.toastr.error('Error when try to update product');
+      }
+    });
   }
 
   private async getProductData() {

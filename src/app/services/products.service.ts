@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { CreateProduct } from '../interfaces/createinterfaces';
 import { Category, Product } from '../interfaces/models';
+import { UpdateProduct } from '../interfaces/updateinterfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,14 @@ export class ProductsService {
 
   async getProductCategories(id: String) {
     return await this.http.get<Array<Category>>(`${environment.apiUrl}/products/${id}/categories`, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
+  }
+
+  async updateProduct(product: UpdateProduct, id: string) {
+    return await this.http.put<Product>(`${environment.apiUrl}/products/${id}`, product, {
       headers: {
         Authorization: 'Bearer ' + this.token
       }
