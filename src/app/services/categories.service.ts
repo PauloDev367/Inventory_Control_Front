@@ -25,6 +25,16 @@ export class CategoriesService {
     });
   }
 
+  async create(category: Category) {
+    return await this.http.post<Category>(`${environment.apiUrl}/categories`, {
+      name: category.name
+    }, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
+  }
+
   async update(category: Category) {
     return await this.http.put<Category>(`${environment.apiUrl}/categories/${category.id}`, {
       name: category.name

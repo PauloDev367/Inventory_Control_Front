@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { PaginateCategories, PaginateSaleHistory } from '../../interfaces/paginated';
-import { ActivatedRoute, Router } from '@angular/router';
+import { PaginateCategories } from '../../interfaces/paginated';
+import {  Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgFor, NgIf } from '@angular/common';
 import { BrTimeFormatPipe } from '../../shared/pipes/br-time-format.pipe';
-import { MovementTypeFormatPipe } from '../../shared/pipes/movement-type-format.pipe';
-import { BrMoneyFormatterPipe } from '../../shared/pipes/br-money-formatter.pipe';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { CategoriesService } from '../../services/categories.service';
 import { CategoriesEditComponent } from '../../shared/components/categories-edit/categories-edit.component';
 import { Category } from '../../interfaces/models';
+import { CategoriesCreateComponent } from '../../shared/components/categories-create/categories-create.component';
+
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [CategoriesEditComponent, NgIf, BrTimeFormatPipe, MovementTypeFormatPipe, NgFor, BrMoneyFormatterPipe, PaginationComponent],
+  imports: [CategoriesCreateComponent, CategoriesEditComponent, NgIf, BrTimeFormatPipe, NgFor, PaginationComponent],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css'
 })
@@ -39,7 +39,6 @@ export class CategoriesComponent implements OnInit {
     private readonly service: CategoriesService,
     private toastr: ToastrService,
     private router: Router,
-    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -67,6 +66,9 @@ export class CategoriesComponent implements OnInit {
     })
   }
 
+  createdCategory(category: Category) {
+    this.categories.items.push(category);
+  }
 
   async deleteCategory(categoryId: string) {
     const confirm = window.confirm('Do you really want to remove this category?');
