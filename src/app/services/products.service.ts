@@ -4,7 +4,7 @@ import { environment } from '../environments/environment';
 import { CreateProduct } from '../interfaces/createinterfaces';
 import { Category, Product } from '../interfaces/models';
 import { UpdateProduct } from '../interfaces/updateinterfaces';
-import { PaginateSaleHistory } from '../interfaces/paginated';
+import { PaginatePriceHistory, PaginateSaleHistory } from '../interfaces/paginated';
 
 @Injectable({
   providedIn: 'root'
@@ -91,6 +91,14 @@ export class ProductsService {
 
   async getProductSalesHistory(id: string, page: number = 1) {
     return await this.http.get<PaginateSaleHistory>(`${environment.apiUrl}/sales/product/${id}?page=${page}`, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
+  }
+ 
+  async getProductPriceHistory(id: string, page: number = 1) {
+    return await this.http.get<PaginatePriceHistory>(`${environment.apiUrl}/products-prices/product/${id}?page=${page}`, {
       headers: {
         Authorization: 'Bearer ' + this.token
       }

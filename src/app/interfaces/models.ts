@@ -35,3 +35,10 @@ export interface SaleHistory {
     totalPrice: number,
     unityPrice: number,
 }
+
+export interface PriceHistory {
+    createdAt: string,
+    id: string,
+    price: number,
+    productId: string,
+}

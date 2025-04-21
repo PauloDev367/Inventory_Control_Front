@@ -7,6 +7,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { ProductSalesHistoryComponent } from './pages/product-sales-history/product-sales-history.component';
+import { ProductPriceHistoryComponent } from './pages/product-price-history/product-price-history.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ export const routes: Routes = [
             { path: 'products', component: ProductsComponent },
             { path: 'products/:id', component: ProductDetailsComponent },
             { path: 'products/:id/sales', component: ProductSalesHistoryComponent },
+            { path: 'products/:id/prices', component: ProductPriceHistoryComponent },
         ],
         canActivate: [authGuard]
     },
