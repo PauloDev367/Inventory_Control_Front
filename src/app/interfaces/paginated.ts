@@ -50,3 +50,11 @@ export interface PaginateSuppliers {
     totalPages: number,
 }
 
+export interface PaginateStockMovement {
+    items: Array<StockMovementHistory>,
+    pageNumber: number,
+    pageSize: number,
+    totalItems: number,
+    totalPages: number,
+}
+
