@@ -66,4 +66,24 @@ export class ProductsService {
       }
     });
   }
+  async removeQuantityToProduct(productId: string, quantity: number, unityPrice: number | null = null, isItASale: boolean = false) {
+    if (isItASale == false) {
+      return await this.http.patch<Product>(`${environment.apiUrl}/products/${productId}/stock-movement/remove`, {
+        quantity
+      }, {
+        headers: {
+          Authorization: 'Bearer ' + this.token
+        }
+      });
+    }
+    return await this.http.post<Product>(`${environment.apiUrl}/sales`, {
+      productId: productId,
+      quantity: quantity,
+      unityPrice: unityPrice
+    }, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
+  }
 }

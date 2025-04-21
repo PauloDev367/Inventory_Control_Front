@@ -1,66 +1,178 @@
-<div
-  class="modal fade"
-  id="addQuantityModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="addQuantityModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addQuantityModalLabel">
-          Add stock to product
-        </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form (ngSubmit)="(addQuantity())" #form="ngForm">
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Quantity to add:</label>
-            <input
-              type="number"
-              class="form-control"
-              name="quantityToAdd"
-              id="quantityToAdd"
-               #qntAddInput="ngModel"
-              [(ngModel)]="quantityToAdd"
-              required
-              min="1"
-            />
-            <div
-              *ngIf="qntAddInput.invalid && qntAddInput.touched"
-              class="text-danger mt-1"
-            >
-              <small *ngIf="qntAddInput.errors?.['required']"
-                >Quantity field is required.</small
-              >
-              <small *ngIf="qntAddInput.errors?.['min']"
-                >Quantity should be bigger than 0.</small
-              >
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
+<div *ngIf="product.createdAt != ''">
+  <div
+    class="modal fade"
+    id="addQuantityModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="addQuantityModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addQuantityModalLabel">
+            Add stock to product
+          </h5>
           <button
             type="button"
-            class="btn btn-sm btn-secondary"
+            class="close"
             data-dismiss="modal"
+            aria-label="Close"
           >
-            Close
-          </button>
-          <button type="submit" class="btn btn-sm btn-info">
-            <i class="fa-regular fa-square-plus"></i> Add
+            <span aria-hidden="true">&times;</span>
           </button>
         </div>
-      </form>
+        <form (ngSubmit)="addQuantity()" #form="ngForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Quantity to add:</label>
+              <input
+                type="number"
+                class="form-control"
+                name="quantityToAdd"
+                id="quantityToAdd"
+                #qntAddInput="ngModel"
+                [(ngModel)]="quantityToAdd"
+                required
+                min="1"
+              />
+              <div
+                *ngIf="qntAddInput.invalid && qntAddInput.touched"
+                class="text-danger mt-1"
+              >
+                <small *ngIf="qntAddInput.errors?.['required']"
+                  >Quantity field is required.</small
+                >
+                <small *ngIf="qntAddInput.errors?.['min']"
+                  >Quantity should be bigger than 0.</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-sm btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-sm btn-info">
+              <i class="fa-regular fa-square-plus"></i> Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="minusQuantityModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="minusQuantityModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="minusQuantityModalLabel">
+            Minus product stock
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form (ngSubmit)="minusQuantity()" #form="ngForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Quantity to remove:</label>
+              <input
+                type="number"
+                class="form-control"
+                name="quantityToRemove"
+                id="quantityToRemove"
+                #qntRemoveInput="ngModel"
+                [(ngModel)]="quantityToRemove"
+                required
+                min="1"
+              />
+              <div
+                *ngIf="qntRemoveInput.invalid && qntRemoveInput.touched"
+                class="text-danger mt-1"
+              >
+                <small *ngIf="qntRemoveInput.errors?.['required']"
+                  >Quantity field is required.</small
+                >
+                <small *ngIf="qntRemoveInput.errors?.['min']"
+                  >Quantity should be bigger than 0.</small
+                >
+              </div>
+            </div>
+
+            <div *ngIf="isItASale">
+              <div class="form-group">
+                <label>Unity price:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="product.price"
+                  [(ngModel)]="product.price"
+                  id="price"
+                  name="price"
+                  required
+                  #priceInput="ngModel"
+                  min="1"
+                />
+                <div
+                  *ngIf="priceInput.invalid && priceInput.touched"
+                  class="text-danger mt-1"
+                >
+                  <small *ngIf="priceInput.errors?.['required']"
+                    >Price field is required.</small
+                  >
+                  <small *ngIf="priceInput.errors?.['min']"
+                    >Price need to be bigger than 1.</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="isItASaleCheck"
+                  [(ngModel)]="isItASale"
+                  name="isItASale"
+                />
+                <label class="form-check-label" for="isItASaleCheck"
+                  >Is it a sale?</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-sm btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-sm btn-danger">
+              <i class="fa-regular fa-square-minus"></i> Remove
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

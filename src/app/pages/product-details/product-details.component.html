@@ -169,7 +169,12 @@
                   >
                     <i class="fa-regular fa-square-plus"></i>
                   </button>
-                  <button type="button" class="btn btn-sm btn-outline-danger">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-outline-danger"
+                    data-toggle="modal"
+                    data-target="#minusQuantityModal"
+                  >
                     <i class="fa-regular fa-square-minus"></i>
                   </button>
                 </div>
@@ -241,6 +246,6 @@
   />
   <app-product-details-add-or-minus-quantity
     (updatedProduct)="updatedProduct($event)"
-    [productId]="product.id"
+    [product]="product"
   />
 </div>
